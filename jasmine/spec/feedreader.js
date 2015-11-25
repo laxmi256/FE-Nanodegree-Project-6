@@ -93,8 +93,8 @@ $(function() {
 		});		
 		
 		it('have at least one entry', function(done) {
-			var numEntries = $('.feed .entry').length;			
-			expect(numEntries).toBeGreaterThan(0);
+			var $numEntries = $('.feed .entry').length;			
+			expect($numEntries).toBeGreaterThan(0);
 			done();
 		});
 	});	
@@ -106,19 +106,19 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-		var currentContent;
+		var $currentContent;
 		
 		beforeEach(function(done) {	
-			loadFeed(0, function() {	
+			loadFeed(0, function() {				
+				$currentContent = $('.feed').html();	
 				done();
-				currentContent = $('.feed').html();	
 			});									
 		});
 		
-		it('changes the content displayed', function(done) {
+		it('changes content when a new feed is loaded', function(done) {
 			loadFeed(1, function() {
-				var newContent = $('.feed').html();
-				expect(currentContent).not.toBe(newContent);
+				var $newContent = $('.feed').html();
+				expect($currentContent).not.toBe($newContent);
 				done();
 			});				
 		});
